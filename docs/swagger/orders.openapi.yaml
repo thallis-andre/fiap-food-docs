@@ -1,0 +1,799 @@
+openapi: 3.0.0
+paths:
+  /healthz:
+    get:
+      operationId: HealthzController_checkHealth
+      summary: Executes Health Check
+      description: >-
+        Runs a health check on the service and its dependencies, including
+        upstream services
+      parameters: []
+      responses:
+        '200':
+          description: The Health Check is successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  info:
+                    type: object
+                    example:
+                      database:
+                        status: up
+                    additionalProperties:
+                      type: object
+                      required:
+                        - status
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties: true
+                    nullable: true
+                  error:
+                    type: object
+                    example: {}
+                    additionalProperties:
+                      type: object
+                      required:
+                        - status
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties: true
+                    nullable: true
+                  details:
+                    type: object
+                    example:
+                      database:
+                        status: up
+                    additionalProperties:
+                      type: object
+                      required:
+                        - status
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties: true
+        '503':
+          description: The Health Check is not successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  info:
+                    type: object
+                    example:
+                      database:
+                        status: up
+                    additionalProperties:
+                      type: object
+                      required:
+                        - status
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties: true
+                    nullable: true
+                  error:
+                    type: object
+                    example:
+                      redis:
+                        status: down
+                        message: Could not connect
+                    additionalProperties:
+                      type: object
+                      required:
+                        - status
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties: true
+                    nullable: true
+                  details:
+                    type: object
+                    example:
+                      database:
+                        status: up
+                      redis:
+                        status: down
+                        message: Could not connect
+                    additionalProperties:
+                      type: object
+                      required:
+                        - status
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties: true
+      tags:
+        - Health Check
+  /healthz/self:
+    get:
+      operationId: HealthzController_checkSelfHealth
+      summary: Executes Self Health Check
+      description: >-
+        Runs a health check on the service and its core dependencies, exclusing
+        upstream services
+      parameters: []
+      responses:
+        '200':
+          description: The Health Check is successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  info:
+                    type: object
+                    example:
+                      database:
+                        status: up
+                    additionalProperties:
+                      type: object
+                      required:
+                        - status
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties: true
+                    nullable: true
+                  error:
+                    type: object
+                    example: {}
+                    additionalProperties:
+                      type: object
+                      required:
+                        - status
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties: true
+                    nullable: true
+                  details:
+                    type: object
+                    example:
+                      database:
+                        status: up
+                    additionalProperties:
+                      type: object
+                      required:
+                        - status
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties: true
+        '503':
+          description: The Health Check is not successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  info:
+                    type: object
+                    example:
+                      database:
+                        status: up
+                    additionalProperties:
+                      type: object
+                      required:
+                        - status
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties: true
+                    nullable: true
+                  error:
+                    type: object
+                    example:
+                      redis:
+                        status: down
+                        message: Could not connect
+                    additionalProperties:
+                      type: object
+                      required:
+                        - status
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties: true
+                    nullable: true
+                  details:
+                    type: object
+                    example:
+                      database:
+                        status: up
+                      redis:
+                        status: down
+                        message: Could not connect
+                    additionalProperties:
+                      type: object
+                      required:
+                        - status
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties: true
+      tags:
+        - Health Check
+  /events/{aggregateId}:
+    get:
+      operationId: AggregateEventsController_getByAggregateId
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AggregateEvent'
+      tags:
+        - Events
+  /v1/items:
+    post:
+      operationId: CreateItemController_execute
+      summary: Creates a new Item
+      description: >-
+        Adds a new item to the list of items that can be used to request an
+        order
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateItemInput'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateItemOutput'
+        '400':
+          description: ''
+        '422':
+          description: ''
+        '500':
+          description: ''
+      tags:
+        - Items
+    get:
+      operationId: FindItemsController_execute
+      summary: Searches for existing items
+      description: Seaches for items using a given criteria or returns everything
+      parameters:
+        - name: name
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: type
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - Snack
+                - Dessert
+                - Beverage
+                - Accompaniment
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '500':
+          description: ''
+      tags:
+        - Items
+  /v1/items/{id}:
+    get:
+      operationId: GetItemByIdController_execute
+      summary: Find an item with its id
+      description: Returns an existing item by querying it with its id
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '400':
+          description: ''
+        '404':
+          description: ''
+        '500':
+          description: ''
+      tags:
+        - Items
+    put:
+      operationId: UpdateItemController_execute
+      summary: Updates an existing item
+      description: Updates values of an existing item
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateItemInput'
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+        '404':
+          description: ''
+        '500':
+          description: ''
+      tags:
+        - Items
+  /v1/orders:
+    post:
+      operationId: CreateOrderController_execute
+      summary: Creates a new order
+      description: Creates a new order
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderInput'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOrderOutput'
+        '400':
+          description: ''
+        '422':
+          description: ''
+        '500':
+          description: ''
+      tags:
+        - Orders
+    get:
+      operationId: FindOrdersController_execute
+      summary: Find orders with the given criteria
+      description: Returns orders that match provided criteria
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: ''
+        '404':
+          description: ''
+        '500':
+          description: ''
+      tags:
+        - Orders
+  /v1/orders/{id}:
+    get:
+      operationId: GetOrderByIdController_execute
+      summary: Find an item with its id
+      description: Returns an existing item by querying it with its id
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: ''
+        '404':
+          description: ''
+        '500':
+          description: ''
+      tags:
+        - Orders
+    put:
+      operationId: AddItemsToOrderController_execute
+      summary: Adds items to existing order
+      description: Adds items to existing order
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddItemsToOrderInput'
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+        '422':
+          description: ''
+        '500':
+          description: ''
+      tags:
+        - Orders
+    patch:
+      operationId: RemoveItemsFromOrderController_execute
+      summary: Removes items from an existing order
+      description: Removes items from an existing order
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveItemsFromOrderInput'
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+        '422':
+          description: ''
+        '500':
+          description: ''
+      tags:
+        - Orders
+  /v1/orders/{id}/checkout:
+    post:
+      operationId: CheckoutOrderController_execute
+      summary: Checkout Order
+      description: Confirms order checkout and requests payment info
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutOrderOutput'
+        '400':
+          description: ''
+        '422':
+          description: ''
+        '500':
+          description: ''
+      tags:
+        - Orders
+  /v1/orders/{id}/complete:
+    post:
+      operationId: CompleteOrderController_execute
+      summary: Complete Order
+      description: When customer picks up, marks orders as completed
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+        '422':
+          description: ''
+        '500':
+          description: ''
+      tags:
+        - Orders
+  /v1/orders-follow-up:
+    get:
+      operationId: FollowUpOrdersController_execute
+      summary: Order Follow Up
+      description: Returns Orders Follow Up
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FollowUpOutput'
+        '400':
+          description: ''
+        '404':
+          description: ''
+        '500':
+          description: ''
+      tags:
+        - Orders
+info:
+  title: FiapBurgerOrder
+  description: Payments Component for Fiap Burger
+  version: v1.0.0-development
+  contact: {}
+tags: []
+servers:
+  - url: http://localhost:3000
+    description: development
+components:
+  schemas:
+    AggregateEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        aggregateId:
+          type: string
+        eventName:
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+        version:
+          type: number
+        data:
+          type: object
+          description: The internal domain event structure
+      required:
+        - id
+        - aggregateId
+        - eventName
+        - timestamp
+        - version
+        - data
+    CreateItemInput:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - Snack
+            - Dessert
+            - Beverage
+            - Accompaniment
+        price:
+          type: number
+        description:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+      required:
+        - name
+        - type
+        - price
+        - description
+        - images
+    CreateItemOutput:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+        - id
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        type:
+          type: string
+          enum:
+            - Snack
+            - Dessert
+            - Beverage
+            - Accompaniment
+        images:
+          type: array
+          items:
+            type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - id
+        - name
+        - description
+        - price
+        - type
+        - images
+        - createdAt
+        - updatedAt
+    UpdateItemInput:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - Snack
+            - Dessert
+            - Beverage
+            - Accompaniment
+        price:
+          type: number
+        description:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+    CreateOrderInput:
+      type: object
+      properties: {}
+    CreateOrderOutput:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+        - id
+    OrderRequester:
+      type: object
+      properties: {}
+    OrderItem:
+      type: object
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
+      required:
+        - key
+        - name
+        - price
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        requester:
+          $ref: '#/components/schemas/OrderRequester'
+        status:
+          type: string
+          enum:
+            - Initiated
+            - PaymentRequested
+            - PreparationRequested
+            - PreparationStarted
+            - PreparationCompleted
+            - Completed
+            - PaymentRejected
+        total:
+          type: number
+        items:
+          $ref: '#/components/schemas/OrderItem'
+        paymentId:
+          type: string
+        qrCode:
+          type: string
+        preparationId:
+          type: string
+        preparationRequestedAt:
+          format: date-time
+          type: string
+        rejectionReason:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - id
+        - status
+        - total
+        - items
+        - createdAt
+    AddItemsToOrderInput:
+      type: object
+      properties: {}
+    RemoveItemsFromOrderInput:
+      type: object
+      properties: {}
+    CheckoutOrderOutput:
+      type: object
+      properties:
+        qrCode:
+          type: string
+      required:
+        - qrCode
+    OrderFollowUp:
+      type: object
+      properties:
+        orderId:
+          type: string
+        customer:
+          type: string
+        waitingTime:
+          type: string
+      required:
+        - orderId
+        - customer
+        - waitingTime
+    FollowUpOutput:
+      type: object
+      properties:
+        ready:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderFollowUp'
+        started:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderFollowUp'
+        received:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderFollowUp'
+externalDocs:
+  description: Export Specs
+  url: /docs-json
