@@ -8,19 +8,8 @@ Este projeto foi desenvolvido durante a **Fase IV** do curso de **Arquitetura de
 
 ## 📹 Demonstrações em Vídeo
 
-### Fase 1 - Monolito com Clean Architecture
-- [Assistir no YouTube](https://www.youtube.com/watch?v=I0tNdblTFDc)
-
-### Fase 2 - Kubernetes e Terraform
-- [Assistir a Parte 1 da Fase 2 no YouTube](https://www.youtube.com/watch?v=r81e0Y-HJx4)
-- [Assistir a Parte 2 da Fase 2 no YouTube](https://www.youtube.com/watch?v=cL7ryiqxlvk)
-
-### Fase 3 - Lambda e API Gateway
-- [Assistir a Parte 1 no YouTube](https://youtu.be/rsVHmP_bMac)
-- [Assistir a Parte 2 no YouTube](https://youtu.be/ouYiMiizpLE)
-
 ### Fase 4 - Microsserviços e Mensageria
-- [Assistir no YouTube](https://youtu.be/8YUMKMkGJ0c)
+- [Assistir no YouTube](https://youtu.be/)
 
 ## 🏗️ Arquitetura da Solução
 
