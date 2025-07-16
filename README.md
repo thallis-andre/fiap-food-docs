@@ -10,7 +10,26 @@ Este projeto foi desenvolvido durante a **Fase IV** do curso de **Arquitetura de
 
 ### Fase 4 - Microsserviços e Mensageria
 - [Assistir no YouTube](https://youtu.be/)
+## 📦 Repositórios da Solução
 
+A solução está organizada em **10 repositórios** especializados:
+
+### 📚 Documentação Central
+- **[fiap-food-docs](https://github.com/thallis-andre/fiap-food-docs)**: Documentação completa da solução
+
+### 🔧 Infraestrutura como Código
+- **[fiap-food-kubernetes](https://github.com/thallis-andre/fiap-food-kubernetes)**: Cluster EKS com Terraform
+- **[fiap-food-gateway](https://github.com/thallis-andre/fiap-food-gateway)**: API Gateway AWS com mapeamentos
+- **[fiap-food-database](https://github.com/thallis-andre/fiap-food-database)**: PostgreSQL RDS com Terraform
+- **[fiap-food-mongodb](https://github.com/thallis-andre/fiap-food-mongodb)**: MongoDB Atlas com Terraform
+- **[fiap-food-rabbitmq](https://github.com/thallis-andre/fiap-food-rabbitmq)**: RabbitMQ no Kubernetes
+
+### 🚀 Aplicações e Serviços
+- **[fiap-food-lambda](https://github.com/thallis-andre/fiap-food-lambda)**: Serviço de autenticação serverless
+- **[fiap-food-orders](https://github.com/thallis-andre/fiap-food-orders)**: Microsserviço de pedidos
+- **[fiap-food-payments](https://github.com/thallis-andre/fiap-food-payments)**: Microsserviço de pagamentos
+- **[fiap-food-preparation](https://github.com/thallis-andre/fiap-food-preparation)**: Microsserviço de preparação
+- 
 ## 🏗️ Arquitetura da Solução
 
 ### Visão Geral da Arquitetura de Microsserviços
@@ -198,26 +217,6 @@ sequenceDiagram
 - **Tables**: preparations, preparation_history
 - **Padrão**: Relacional para consistência
 - **Justificativa**: Dados estruturados, integridade referencial
-
-## 📦 Repositórios da Solução
-
-A solução está organizada em **10 repositórios** especializados:
-
-### 📚 Documentação Central
-- **[fiap-food-docs](https://github.com/thallis-andre/fiap-food-docs)**: Documentação completa da solução
-
-### 🔧 Infraestrutura como Código
-- **[fiap-food-kubernetes](https://github.com/thallis-andre/fiap-food-kubernetes)**: Cluster EKS com Terraform
-- **[fiap-food-gateway](https://github.com/thallis-andre/fiap-food-gateway)**: API Gateway AWS com mapeamentos
-- **[fiap-food-database](https://github.com/thallis-andre/fiap-food-database)**: PostgreSQL RDS com Terraform
-- **[fiap-food-mongodb](https://github.com/thallis-andre/fiap-food-mongodb)**: MongoDB Atlas com Terraform
-- **[fiap-food-rabbitmq](https://github.com/thallis-andre/fiap-food-rabbitmq)**: RabbitMQ no Kubernetes
-
-### 🚀 Aplicações e Serviços
-- **[fiap-food-lambda](https://github.com/thallis-andre/fiap-food-lambda)**: Serviço de autenticação serverless
-- **[fiap-food-orders](https://github.com/thallis-andre/fiap-food-orders)**: Microsserviço de pedidos
-- **[fiap-food-payments](https://github.com/thallis-andre/fiap-food-payments)**: Microsserviço de pagamentos
-- **[fiap-food-preparation](https://github.com/thallis-andre/fiap-food-preparation)**: Microsserviço de preparação
 
 ## 🧪 Qualidade e Testes
 
