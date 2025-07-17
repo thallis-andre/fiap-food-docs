@@ -9,7 +9,8 @@ Este projeto foi desenvolvido durante a **Fase IV** do curso de **Arquitetura de
 ## 📹 Demonstrações em Vídeo
 
 ### Fase 4 - Microsserviços e Mensageria
-- [Assistir no YouTube](https://youtu.be/)
+- [Assistir no YouTube](https://youtu.be/kVb_zAjmxCI)
+
 ## 📦 Repositórios da Solução
 
 A solução está organizada em **10 repositórios** especializados:
@@ -262,7 +263,9 @@ Cada microsserviço possui documentação interativa:
 - **Preparation API**: [Ver Swagger](./docs/swagger/preparation.openapi.yaml)
 
 ### Collection do Postman
-Collection automatizada para testes: [Acessar Postman](https://www.postman.com/gm50x/workspace/7soat31/folder/10261834-ead661be-6140-4298-ac6a-380fa0c3c5b3?action=share&source=copy-link&creator=10261834&ctx=documentation)
+Collection automatizada para testes: [Download Collection Postman](./docs/resources/FiapFood.postman_collection.json)
+Environments: [Download](./docs/resources/FiapFoodAWS.postman_environment.json)
+
 
 ## 🎯 Requisitos Atendidos
 

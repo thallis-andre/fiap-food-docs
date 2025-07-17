@@ -1,0 +1,3111 @@
+{
+	"info": {
+		"_postman_id": "e5a68007-02d7-4a27-9d50-9480b80c1b32",
+		"name": "Fiap Food",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46599281",
+		"_collection_link": "https://thallis-8465591.postman.co/workspace/Thallis's-Workspace~8c5753a0-cbbb-4c58-8d48-2ed85a8f4248/collection/46599281-e5a68007-02d7-4a27-9d50-9480b80c1b32?action=share&source=collection_link&creator=46599281"
+	},
+	"item": [
+		{
+			"name": "Fase 4",
+			"item": [
+				{
+					"name": "All Endpoints",
+					"item": [
+						{
+							"name": "Identity",
+							"item": [
+								{
+									"name": "Utils",
+									"item": [
+										{
+											"name": "Sign Up",
+											"item": [
+												{
+													"name": "Sign Up as ADMIN",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"exec": [
+																	"function generateCPF() {\r",
+																	"    function randomize(n) {\r",
+																	"        var ranNum = Math.round(Math.random() * n);\r",
+																	"        return ranNum;\r",
+																	"    }\r",
+																	"\r",
+																	"    function mod(dividendo, divisor) {\r",
+																	"        return Math.round(dividendo - (Math.floor(dividendo / divisor) * divisor));\r",
+																	"    }\r",
+																	"\r",
+																	"    var n = 9;\r",
+																	"    var n1 = randomize(n);\r",
+																	"    var n2 = randomize(n);\r",
+																	"    var n3 = randomize(n);\r",
+																	"    var n4 = randomize(n);\r",
+																	"    var n5 = randomize(n);\r",
+																	"    var n6 = randomize(n);\r",
+																	"    var n7 = randomize(n);\r",
+																	"    var n8 = randomize(n);\r",
+																	"    var n9 = randomize(n);\r",
+																	"\r",
+																	"    var d1 = n9 * 2 + n8 * 3 + n7 * 4 + n6 * 5 + n5 * 6 + n4 * 7 + n3 * 8 + n2 * 9 + n1 * 10;\r",
+																	"    d1 = 11 - (mod(d1, 11));\r",
+																	"    if (d1 >= 10) d1 = 0;\r",
+																	"\r",
+																	"    var d2 = d1 * 2 + n9 * 3 + n8 * 4 + n7 * 5 + n6 * 6 + n5 * 7 + n4 * 8 + n3 * 9 + n2 * 10 + n1 * 11;\r",
+																	"    d2 = 11 - (mod(d2, 11));\r",
+																	"    if (d2 >= 10) d2 = 0;\r",
+																	"\r",
+																	"    return '' + n1 + n2 + n3 + '.' + n4 + n5 + n6 + '.' + n7 + n8 + n9 + '-' + d1 + d2;\r",
+																	"}\r",
+																	"\r",
+																	"pm.collectionVariables.set(\"randomCPF\", generateCPF());\r",
+																	""
+																],
+																"type": "text/javascript",
+																"packages": {}
+															}
+														},
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"const request = JSON.parse(pm.request.body.raw).data\r",
+																	"\r",
+																	"pm.collectionVariables.set(\"users.admin.cpf\", request.cpf)\r",
+																	"pm.collectionVariables.set(\"users.admin.name\", request.name)\r",
+																	"pm.collectionVariables.set(\"users.admin.email\", request.email)\r",
+																	"\r",
+																	"const result = pm.response.json();\r",
+																	"pm.environment.set(\"tokens.admin\", result.token);\r",
+																	""
+																],
+																"type": "text/javascript",
+																"packages": {}
+															}
+														}
+													],
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n    \"action\": \"SignUp\",\r\n    \"data\": {\r\n        \"cpf\": \"{{demo.admin.cpf}}\",\r\n        \"name\": \"{{demo.admin.name}}\",\r\n        \"email\": \"{{demo.admin.email}}\",\r\n        \"role\": \"ADMIN\"\r\n    }\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{BaseURL}}/identity",
+															"host": [
+																"{{BaseURL}}"
+															],
+															"path": [
+																"identity"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Sign Up as CUSTOMER",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"exec": [
+																	"function generateCPF() {\r",
+																	"    function randomize(n) {\r",
+																	"        var ranNum = Math.round(Math.random() * n);\r",
+																	"        return ranNum;\r",
+																	"    }\r",
+																	"\r",
+																	"    function mod(dividendo, divisor) {\r",
+																	"        return Math.round(dividendo - (Math.floor(dividendo / divisor) * divisor));\r",
+																	"    }\r",
+																	"\r",
+																	"    var n = 9;\r",
+																	"    var n1 = randomize(n);\r",
+																	"    var n2 = randomize(n);\r",
+																	"    var n3 = randomize(n);\r",
+																	"    var n4 = randomize(n);\r",
+																	"    var n5 = randomize(n);\r",
+																	"    var n6 = randomize(n);\r",
+																	"    var n7 = randomize(n);\r",
+																	"    var n8 = randomize(n);\r",
+																	"    var n9 = randomize(n);\r",
+																	"\r",
+																	"    var d1 = n9 * 2 + n8 * 3 + n7 * 4 + n6 * 5 + n5 * 6 + n4 * 7 + n3 * 8 + n2 * 9 + n1 * 10;\r",
+																	"    d1 = 11 - (mod(d1, 11));\r",
+																	"    if (d1 >= 10) d1 = 0;\r",
+																	"\r",
+																	"    var d2 = d1 * 2 + n9 * 3 + n8 * 4 + n7 * 5 + n6 * 6 + n5 * 7 + n4 * 8 + n3 * 9 + n2 * 10 + n1 * 11;\r",
+																	"    d2 = 11 - (mod(d2, 11));\r",
+																	"    if (d2 >= 10) d2 = 0;\r",
+																	"\r",
+																	"    return '' + n1 + n2 + n3 + '.' + n4 + n5 + n6 + '.' + n7 + n8 + n9 + '-' + d1 + d2;\r",
+																	"}\r",
+																	"\r",
+																	"pm.collectionVariables.set(\"randomCPF\", generateCPF());\r",
+																	""
+																],
+																"type": "text/javascript",
+																"packages": {}
+															}
+														},
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"const request = JSON.parse(pm.request.body.raw).data\r",
+																	"\r",
+																	"pm.collectionVariables.set(\"users.customer.cpf\", request.cpf)\r",
+																	"pm.collectionVariables.set(\"users.customer.name\", request.name)\r",
+																	"pm.collectionVariables.set(\"users.customer.email\", request.email)\r",
+																	"\r",
+																	"const result = pm.response.json();\r",
+																	"pm.environment.set(\"tokens.customer\", result.token);\r",
+																	""
+																],
+																"type": "text/javascript",
+																"packages": {}
+															}
+														}
+													],
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n    \"action\": \"SignUp\",\r\n    \"data\": {\r\n        \"cpf\": \"{{demo.customer.cpf}}\",\r\n        \"name\": \"{{demo.customer.name}}\",\r\n        \"email\": \"{{demo.customer.email}}\",\r\n        \"role\": \"CUSTOMER\"\r\n    }\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{BaseURL}}/identity",
+															"host": [
+																"{{BaseURL}}"
+															],
+															"path": [
+																"identity"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "Sign In",
+											"item": [
+												{
+													"name": "Sign In as ADMIN",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"exec": [
+																	""
+																],
+																"type": "text/javascript",
+																"packages": {}
+															}
+														},
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"const result = pm.response.json();\r",
+																	"pm.environment.set(\"tokens.admin\", result.token);\r",
+																	""
+																],
+																"type": "text/javascript",
+																"packages": {}
+															}
+														}
+													],
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n    \"action\": \"SignIn\",\r\n    \"data\": {\r\n        \"cpf\": \"{{demo.admin.cpf}}\"\r\n    }\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{BaseURL}}/identity",
+															"host": [
+																"{{BaseURL}}"
+															],
+															"path": [
+																"identity"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Sign In as CUSTOMER",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"exec": [
+																	""
+																],
+																"type": "text/javascript",
+																"packages": {}
+															}
+														},
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"const result = pm.response.json();\r",
+																	"pm.environment.set(\"tokens.customer\", result.token);\r",
+																	""
+																],
+																"type": "text/javascript",
+																"packages": {}
+															}
+														}
+													],
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n    \"action\": \"SignIn\",\r\n    \"data\": {\r\n        \"cpf\": \"{{demo.customer.cpf}}\"\r\n    }\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{BaseURL}}/identity",
+															"host": [
+																"{{BaseURL}}"
+															],
+															"path": [
+																"identity"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Sign Up",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"function generateCPF() {\r",
+													"    function randomize(n) {\r",
+													"        var ranNum = Math.round(Math.random() * n);\r",
+													"        return ranNum;\r",
+													"    }\r",
+													"\r",
+													"    function mod(dividendo, divisor) {\r",
+													"        return Math.round(dividendo - (Math.floor(dividendo / divisor) * divisor));\r",
+													"    }\r",
+													"\r",
+													"    var n = 9;\r",
+													"    var n1 = randomize(n);\r",
+													"    var n2 = randomize(n);\r",
+													"    var n3 = randomize(n);\r",
+													"    var n4 = randomize(n);\r",
+													"    var n5 = randomize(n);\r",
+													"    var n6 = randomize(n);\r",
+													"    var n7 = randomize(n);\r",
+													"    var n8 = randomize(n);\r",
+													"    var n9 = randomize(n);\r",
+													"\r",
+													"    var d1 = n9 * 2 + n8 * 3 + n7 * 4 + n6 * 5 + n5 * 6 + n4 * 7 + n3 * 8 + n2 * 9 + n1 * 10;\r",
+													"    d1 = 11 - (mod(d1, 11));\r",
+													"    if (d1 >= 10) d1 = 0;\r",
+													"\r",
+													"    var d2 = d1 * 2 + n9 * 3 + n8 * 4 + n7 * 5 + n6 * 6 + n5 * 7 + n4 * 8 + n3 * 9 + n2 * 10 + n1 * 11;\r",
+													"    d2 = 11 - (mod(d2, 11));\r",
+													"    if (d2 >= 10) d2 = 0;\r",
+													"\r",
+													"    return '' + n1 + n2 + n3 + '.' + n4 + n5 + n6 + '.' + n7 + n8 + n9 + '-' + d1 + d2;\r",
+													"}\r",
+													"\r",
+													"pm.collectionVariables.set(\"randomCPF\", generateCPF());\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const request = JSON.parse(pm.request.body.raw).data\r",
+													"\r",
+													"pm.collectionVariables.set(\"users.customer.cpf\", request.cpf)\r",
+													"pm.collectionVariables.set(\"users.customer.name\", request.name)\r",
+													"pm.collectionVariables.set(\"users.customer.email\", request.email)\r",
+													"\r",
+													"const result = pm.response.json();\r",
+													"pm.environment.set(\"tokens.customer\", result.token);\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"action\": \"SignUp\",\r\n    \"data\": {\r\n        \"cpf\": \"{{randomCPF}}\",\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"role\": \"CUSTOMER\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/identity",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"identity"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Sign In",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const result = pm.response.json();\r",
+													"pm.environment.set(\"tokens.customer\", result.token);\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"action\": \"SignIn\",\r\n    \"data\": {\r\n        \"cpf\": \"{{users.customer.cpf}}\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/identity",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"identity"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "# Processo de Autenticação\n\nGeração de Token de Acesso para integração com a API",
+							"auth": {
+								"type": "noauth"
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Payments Service",
+							"item": [
+								{
+									"name": "Healthz",
+									"item": [
+										{
+											"name": "Full",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{PaymentServiceBaseURL}}/healthz",
+													"host": [
+														"{{PaymentServiceBaseURL}}"
+													],
+													"path": [
+														"healthz"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Self",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{PaymentServiceBaseURL}}/healthz/self",
+													"host": [
+														"{{PaymentServiceBaseURL}}"
+													],
+													"path": [
+														"healthz",
+														"self"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Events",
+									"item": [
+										{
+											"name": "Get Events",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{PaymentServiceBaseURL}}/events/:aggregateId",
+													"host": [
+														"{{PaymentServiceBaseURL}}"
+													],
+													"path": [
+														"events",
+														":aggregateId"
+													],
+													"variable": [
+														{
+															"key": "aggregateId",
+															"value": "{{PaymentId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Payment",
+									"item": [
+										{
+											"name": "Request Payment",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { id } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', id)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"type\": \"PixQrCode\",\r\n    \"amount\": 999.99\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{PaymentServiceBaseURL}}/v1/payments",
+													"host": [
+														"{{PaymentServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"payments"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Approve Payment",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{tokens.customer}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{PaymentServiceBaseURL}}/v1/payments/:id/approve",
+													"host": [
+														"{{PaymentServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"payments",
+														":id",
+														"approve"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PaymentId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Reject Payment",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{PaymentServiceBaseURL}}/v1/payments/:id/reject",
+													"host": [
+														"{{PaymentServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"payments",
+														":id",
+														"reject"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PaymentId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get Payment",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{PaymentServiceBaseURL}}/v1/payments/:id",
+													"host": [
+														"{{PaymentServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"payments",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PaymentId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Preparation Service",
+							"item": [
+								{
+									"name": "Healthz",
+									"item": [
+										{
+											"name": "Full",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{PreparationServiceBaseURL}}/healthz",
+													"host": [
+														"{{PreparationServiceBaseURL}}"
+													],
+													"path": [
+														"healthz"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Self",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{PreparationServiceBaseURL}}/healthz/self",
+													"host": [
+														"{{PreparationServiceBaseURL}}"
+													],
+													"path": [
+														"healthz",
+														"self"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Events",
+									"item": [
+										{
+											"name": "Get Events",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{PreparationServiceBaseURL}}/events/:aggregateId",
+													"host": [
+														"{{PreparationServiceBaseURL}}"
+													],
+													"path": [
+														"events",
+														":aggregateId"
+													],
+													"variable": [
+														{
+															"key": "aggregateId",
+															"value": "{{PreparationId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Preparation",
+									"item": [
+										{
+											"name": "Advance Preparation Status",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{tokens.admin}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PATCH",
+												"header": [],
+												"url": {
+													"raw": "{{PreparationServiceBaseURL}}/v1/preparations/:id/advance",
+													"host": [
+														"{{PreparationServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"preparations",
+														":id",
+														"advance"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PreparationId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Query Preparation",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{PreparationServiceBaseURL}}/v1/preparations?status=Requested",
+													"host": [
+														"{{PreparationServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"preparations"
+													],
+													"query": [
+														{
+															"key": "status",
+															"value": "Requested"
+														},
+														{
+															"key": "status",
+															"value": "Completed",
+															"disabled": true
+														},
+														{
+															"key": "status",
+															"value": "Started",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get Preparations By Id",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{tokens.admin}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{PreparationServiceBaseURL}}/v1/preparations/:id",
+													"host": [
+														"{{PreparationServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"preparations",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PreparationId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Orders Service",
+							"item": [
+								{
+									"name": "Healthz",
+									"item": [
+										{
+											"name": "Full",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/healthz",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"healthz"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Self",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/healthz/self",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"healthz",
+														"self"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Events",
+									"item": [
+										{
+											"name": "Get Events",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/events/:aggregateId",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"events",
+														":aggregateId"
+													],
+													"variable": [
+														{
+															"key": "aggregateId",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Items",
+									"item": [
+										{
+											"name": "Create Item",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { id } = pm.response.json();\r",
+															"pm.environment.set('ItemId', id);\r",
+															"\r",
+															"\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"const values = [\r",
+															"    'Snack',\r",
+															"    'Dessert',\r",
+															"    'Beverage',\r",
+															"    'Accompaniment'\r",
+															"]\r",
+															"\r",
+															"const randomPosition = _.random(0, values.length - 1)\r",
+															"const randomItemType = values[randomPosition]\r",
+															"pm.environment.set('RandomItemType', randomItemType)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{tokens.admin}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"name\": \"{{$randomAdjective}} {{$randomNoun}}\",\r\n    \"price\": 12.99,\r\n    \"description\": \"{{$randomCatchPhrase}}\",\r\n    \"type\": \"{{RandomItemType}}\", // Snack | Beverage | Dessert | Accompaniment\r\n    \"images\": [\r\n        \"{{$randomFoodImage}}\"\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/items?type=Dessert&type=Accompaniment&type=Snack&type=Beverage",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"items"
+													],
+													"query": [
+														{
+															"key": "type",
+															"value": "Dessert"
+														},
+														{
+															"key": "type",
+															"value": "Accompaniment"
+														},
+														{
+															"key": "type",
+															"value": "Snack"
+														},
+														{
+															"key": "type",
+															"value": "Beverage"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update Item",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{tokens.admin}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"name\": \"Pudim\",\r\n    \"price\": 12.99,\r\n    \"description\": \"Some nice description for XBurger\",\r\n    \"type\": \"Dessert\",\r\n    \"images\": [\r\n        \"https://anyurl.com\"\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/items/687850362d1ce6db2e2f6067",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"items",
+														"687850362d1ce6db2e2f6067"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get Item By Id",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/items/687850362d1ce6db2e2f6067",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"items",
+														"687850362d1ce6db2e2f6067"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Find Items",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/items?type=Dessert",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"items"
+													],
+													"query": [
+														{
+															"key": "name",
+															"value": "X-Burger",
+															"disabled": true
+														},
+														{
+															"key": "type",
+															"value": "Dessert"
+														},
+														{
+															"key": "type",
+															"value": "Accompaniment",
+															"disabled": true
+														},
+														{
+															"key": "type",
+															"value": "Snack",
+															"disabled": true
+														},
+														{
+															"key": "type",
+															"value": "Beverage",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Order",
+									"item": [
+										{
+											"name": "Create Empty Order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { id } = pm.response.json();\r",
+															"pm.environment.set(\"OrderId\", id);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{tokens.customer}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create Order With Items",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { id } = pm.response.json();\r",
+															"pm.environment.set(\"OrderId\", id);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"items\": [\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        },\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        },\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Add Items To Order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"items\": [\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        },\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        },\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Remove Items From Order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"items\": [\r\n        {\r\n            \"key\": \"b29d53e9-e4cb-444f-bda4-80feffab1786\"\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Checkout",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id/checkout",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id",
+														"checkout"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Complete",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id/complete",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id",
+														"complete"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get Order By Id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{tokens.customer}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Find Orders",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{tokens.admin}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders"
+													],
+													"query": [
+														{
+															"key": "from",
+															"value": "2024-11-22",
+															"disabled": true
+														},
+														{
+															"key": "to",
+															"value": "2024-11-22",
+															"disabled": true
+														},
+														{
+															"key": "customerCpf",
+															"value": "01234567890",
+															"disabled": true
+														},
+														{
+															"key": "customerEmail",
+															"value": "jack@sparrow.com",
+															"disabled": true
+														},
+														{
+															"key": "status",
+															"value": "Initiated",
+															"disabled": true
+														},
+														{
+															"key": "status",
+															"value": "PaymentRequested",
+															"disabled": true
+														},
+														{
+															"key": "status",
+															"value": "PreparationRequested",
+															"disabled": true
+														},
+														{
+															"key": "status",
+															"value": "Completed",
+															"disabled": true
+														},
+														{
+															"key": "status",
+															"value": "PaymentRejected",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Follow Up",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders-follow-up",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders-follow-up"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Scenarios",
+							"item": [
+								{
+									"name": "Order Completed",
+									"item": [
+										{
+											"name": "Create Order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { id } = pm.response.json();\r",
+															"pm.environment.set(\"OrderId\", id);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"items\": [\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        },\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        },\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Checkout Order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id/checkout",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id",
+														"checkout"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get PaymentId",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Approve Payment",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"url": {
+													"raw": "{{PaymentServiceBaseURL}}/v1/payments/:id/approve",
+													"host": [
+														"{{PaymentServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"payments",
+														":id",
+														"approve"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PaymentId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get PreparationId",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Start Preparation",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "eyJraWQiOiJJaWI4dTYrMk5JS29mc2RXdEUwWEJhXC8wclVhSWtHbU82WndsV3BBck1Zcz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3NGE4MjRhOC0wMDcxLTcwYTctMmNiOC01NjMzZjdlMzY5Y2IiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV95REFKM29aUXkiLCJjb2duaXRvOnVzZXJuYW1lIjoiMTE0NzI4MDI2NjciLCJvcmlnaW5fanRpIjoiYmYyMTRmNWEtMGMzMC00M2U0LWFmNGMtMTMyNTJiODJiMmRjIiwiYXVkIjoiNHZoMnFuY2I3dG9xOW9zZGExZ2ZtOGhmamciLCJldmVudF9pZCI6ImM3MjE4NDZkLWM2YTUtNGMxZS05YzJiLTkzZDM1NGZkOWU3MSIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNzI3MDM3NTEyLCJuYW1lIjoiTWFjayBXYWVsY2hpIiwiZXhwIjoxNzI3MDQxMTEyLCJjdXN0b206cm9sZSI6IkFETUlOIiwiY3VzdG9tOmNwZiI6IjExNDcyODAyNjY3IiwiaWF0IjoxNzI3MDM3NTEyLCJqdGkiOiI5MzNlOGYwMy04M2YwLTQ2N2EtYWUzZC0zYzVjMDEyNWM3NjUiLCJlbWFpbCI6IktlbGx5NjNAaG90bWFpbC5jb20ifQ.LAJ1OaL4Bwk-nMuLMe9YUl1kqX4AW3FC-SP_4oX1kQhJgpTd1PnU_nuMRdJ3JRlJYhUddC4yJ2p9_kdX6K_pcmaFGPPKDyWMlWTCz7HcUnihRnGdSetBW-pGVx8MI7iBNIyeFJetA2IAiyXtmQ5_TvvJvCD3RxcubwI_U1XiP1Bz2dx_LAGFGToDmPydMSarayA6QH_CdGWExVjQ0q6VswrJjHwM8WSPHMnfVffob7iDkLidNMC6l_xekTBj6-cgQ1Y37KPFizdQI9mgxQTqN57EelOjVjCqotAPkjgqPwYsOLLenW29A-TgwQ0dIx2ly-mKqZn4vrEyINO675gw3w",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PATCH",
+												"header": [],
+												"url": {
+													"raw": "{{PreparationServiceBaseURL}}/v1/preparations/:id/advance",
+													"host": [
+														"{{PreparationServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"preparations",
+														":id",
+														"advance"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PreparationId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Complete Preparation",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "eyJraWQiOiJJaWI4dTYrMk5JS29mc2RXdEUwWEJhXC8wclVhSWtHbU82WndsV3BBck1Zcz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3NGE4MjRhOC0wMDcxLTcwYTctMmNiOC01NjMzZjdlMzY5Y2IiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV95REFKM29aUXkiLCJjb2duaXRvOnVzZXJuYW1lIjoiMTE0NzI4MDI2NjciLCJvcmlnaW5fanRpIjoiYmYyMTRmNWEtMGMzMC00M2U0LWFmNGMtMTMyNTJiODJiMmRjIiwiYXVkIjoiNHZoMnFuY2I3dG9xOW9zZGExZ2ZtOGhmamciLCJldmVudF9pZCI6ImM3MjE4NDZkLWM2YTUtNGMxZS05YzJiLTkzZDM1NGZkOWU3MSIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNzI3MDM3NTEyLCJuYW1lIjoiTWFjayBXYWVsY2hpIiwiZXhwIjoxNzI3MDQxMTEyLCJjdXN0b206cm9sZSI6IkFETUlOIiwiY3VzdG9tOmNwZiI6IjExNDcyODAyNjY3IiwiaWF0IjoxNzI3MDM3NTEyLCJqdGkiOiI5MzNlOGYwMy04M2YwLTQ2N2EtYWUzZC0zYzVjMDEyNWM3NjUiLCJlbWFpbCI6IktlbGx5NjNAaG90bWFpbC5jb20ifQ.LAJ1OaL4Bwk-nMuLMe9YUl1kqX4AW3FC-SP_4oX1kQhJgpTd1PnU_nuMRdJ3JRlJYhUddC4yJ2p9_kdX6K_pcmaFGPPKDyWMlWTCz7HcUnihRnGdSetBW-pGVx8MI7iBNIyeFJetA2IAiyXtmQ5_TvvJvCD3RxcubwI_U1XiP1Bz2dx_LAGFGToDmPydMSarayA6QH_CdGWExVjQ0q6VswrJjHwM8WSPHMnfVffob7iDkLidNMC6l_xekTBj6-cgQ1Y37KPFizdQI9mgxQTqN57EelOjVjCqotAPkjgqPwYsOLLenW29A-TgwQ0dIx2ly-mKqZn4vrEyINO675gw3w",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PATCH",
+												"header": [],
+												"url": {
+													"raw": "{{PreparationServiceBaseURL}}/v1/preparations/:id/advance",
+													"host": [
+														"{{PreparationServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"preparations",
+														":id",
+														"advance"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PreparationId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Complete Order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "eyJraWQiOiJJaWI4dTYrMk5JS29mc2RXdEUwWEJhXC8wclVhSWtHbU82WndsV3BBck1Zcz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3NGE4MjRhOC0wMDcxLTcwYTctMmNiOC01NjMzZjdlMzY5Y2IiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV95REFKM29aUXkiLCJjb2duaXRvOnVzZXJuYW1lIjoiMTE0NzI4MDI2NjciLCJvcmlnaW5fanRpIjoiYmYyMTRmNWEtMGMzMC00M2U0LWFmNGMtMTMyNTJiODJiMmRjIiwiYXVkIjoiNHZoMnFuY2I3dG9xOW9zZGExZ2ZtOGhmamciLCJldmVudF9pZCI6ImM3MjE4NDZkLWM2YTUtNGMxZS05YzJiLTkzZDM1NGZkOWU3MSIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNzI3MDM3NTEyLCJuYW1lIjoiTWFjayBXYWVsY2hpIiwiZXhwIjoxNzI3MDQxMTEyLCJjdXN0b206cm9sZSI6IkFETUlOIiwiY3VzdG9tOmNwZiI6IjExNDcyODAyNjY3IiwiaWF0IjoxNzI3MDM3NTEyLCJqdGkiOiI5MzNlOGYwMy04M2YwLTQ2N2EtYWUzZC0zYzVjMDEyNWM3NjUiLCJlbWFpbCI6IktlbGx5NjNAaG90bWFpbC5jb20ifQ.LAJ1OaL4Bwk-nMuLMe9YUl1kqX4AW3FC-SP_4oX1kQhJgpTd1PnU_nuMRdJ3JRlJYhUddC4yJ2p9_kdX6K_pcmaFGPPKDyWMlWTCz7HcUnihRnGdSetBW-pGVx8MI7iBNIyeFJetA2IAiyXtmQ5_TvvJvCD3RxcubwI_U1XiP1Bz2dx_LAGFGToDmPydMSarayA6QH_CdGWExVjQ0q6VswrJjHwM8WSPHMnfVffob7iDkLidNMC6l_xekTBj6-cgQ1Y37KPFizdQI9mgxQTqN57EelOjVjCqotAPkjgqPwYsOLLenW29A-TgwQ0dIx2ly-mKqZn4vrEyINO675gw3w",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id/complete",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id",
+														"complete"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get Order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Order Ready",
+									"item": [
+										{
+											"name": "Create Order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { id } = pm.response.json();\r",
+															"pm.environment.set(\"OrderId\", id);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"items\": [\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        },\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        },\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Checkout",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id/checkout",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id",
+														"checkout"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get PaymentId",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Approve Payment",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"url": {
+													"raw": "{{PaymentServiceBaseURL}}/v1/payments/:id/approve",
+													"host": [
+														"{{PaymentServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"payments",
+														":id",
+														"approve"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PaymentId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get PreparationId",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Start Preparation",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"url": {
+													"raw": "{{PreparationServiceBaseURL}}/v1/preparations/:id/advance",
+													"host": [
+														"{{PreparationServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"preparations",
+														":id",
+														"advance"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PreparationId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Complete Preparation",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"url": {
+													"raw": "{{PreparationServiceBaseURL}}/v1/preparations/:id/advance",
+													"host": [
+														"{{PreparationServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"preparations",
+														":id",
+														"advance"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PreparationId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get Order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Order Started",
+									"item": [
+										{
+											"name": "Create Order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { id } = pm.response.json();\r",
+															"pm.environment.set(\"OrderId\", id);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"items\": [\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        },\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        },\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Checkout",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id/checkout",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id",
+														"checkout"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get PaymentId",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Approve Payment",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"url": {
+													"raw": "{{PaymentServiceBaseURL}}/v1/payments/:id/approve",
+													"host": [
+														"{{PaymentServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"payments",
+														":id",
+														"approve"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PaymentId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get PreparationId",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Start Preparation",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"url": {
+													"raw": "{{PreparationServiceBaseURL}}/v1/preparations/:id/advance",
+													"host": [
+														"{{PreparationServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"preparations",
+														":id",
+														"advance"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PreparationId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get Order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Order Received",
+									"item": [
+										{
+											"name": "Create Order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { id } = pm.response.json();\r",
+															"pm.environment.set(\"OrderId\", id);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"items\": [\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        },\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        },\r\n        {\r\n            \"id\": \"{{ItemId}}\"\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Checkout",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id/checkout",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id",
+														"checkout"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get PaymentId",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Approve Payment",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"url": {
+													"raw": "{{PaymentServiceBaseURL}}/v1/payments/:id/approve",
+													"host": [
+														"{{PaymentServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"payments",
+														":id",
+														"approve"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{PaymentId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get Order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"const { paymentId, preparationId } = pm.response.json()\r",
+															"\r",
+															"pm.environment.set('PaymentId', paymentId)\r",
+															"pm.environment.set('PreparationId', preparationId)"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/orders/:id",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "{{OrderId}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Follow Up",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const { paymentId, preparationId } = pm.response.json()\r",
+													"\r",
+													"pm.environment.set('PaymentId', paymentId)\r",
+													"pm.environment.set('PreparationId', preparationId)"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{OrderServiceBaseURL}}/v1/orders-follow-up",
+											"host": [
+												"{{OrderServiceBaseURL}}"
+											],
+											"path": [
+												"v1",
+												"orders-follow-up"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Utils",
+							"item": [
+								{
+									"name": "Populate Catalogue",
+									"item": [
+										{
+											"name": "Create X-Burger Snack",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"name\": \"X-Burger\",\r\n    \"price\": 14.99,\r\n    \"description\": \"Some nice description for X-Burger\",\r\n    \"type\": \"Snack\",\r\n    \"images\": [\r\n        \"https://anyurl.com\"\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/items",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"items"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create X-Egg Snack",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"name\": \"X-Egg\",\r\n    \"price\": 12.99,\r\n    \"description\": \"Some nice description for X-Egg\",\r\n    \"type\": \"Snack\",\r\n    \"images\": [\r\n        \"https://anyurl.com\"\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/items",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"items"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create Coke Beverage",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"name\": \"Coke\",\r\n    \"price\": 9.99,\r\n    \"description\": \"Some nice description for Coke\",\r\n    \"type\": \"Beverage\",\r\n    \"images\": [\r\n        \"https://anyurl.com\"\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/items",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"items"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create Orange Juice Beverage",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"name\": \"Orange Juice\",\r\n    \"price\": 6.99,\r\n    \"description\": \"Some nice description for Orange Juice\",\r\n    \"type\": \"Beverage\",\r\n    \"images\": [\r\n        \"https://anyurl.com\"\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/items",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"items"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create Ice Cream Dessert",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"name\": \"Ice Cream\",\r\n    \"price\": 10.99,\r\n    \"description\": \"Some nice description for Ice Cream\",\r\n    \"type\": \"Dessert\",\r\n    \"images\": [\r\n        \"https://anyurl.com\"\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/items",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"items"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create Cookie Dessert",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"name\": \"Cookie\",\r\n    \"price\": 8.00,\r\n    \"description\": \"Some nice description for Cookie\",\r\n    \"type\": \"Dessert\",\r\n    \"images\": [\r\n        \"https://anyurl.com\"\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/items",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"items"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create French Fries Accompaniment",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"name\": \"French Fries\",\r\n    \"price\": 9.99,\r\n    \"description\": \"Some nice description for French Fries\",\r\n    \"type\": \"Accompaniment\",\r\n    \"images\": [\r\n        \"https://anyurl.com\"\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/items",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"items"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create Nuggets Accompaniment",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"name\": \"Nuggets\",\r\n    \"price\": 7.90,\r\n    \"description\": \"Some nice description for Nuggets\",\r\n    \"type\": \"Accompaniment\",\r\n    \"images\": [\r\n        \"https://anyurl.com\"\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{OrderServiceBaseURL}}/v1/items",
+													"host": [
+														"{{OrderServiceBaseURL}}"
+													],
+													"path": [
+														"v1",
+														"items"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"auth": {
+										"type": "bearer",
+										"bearer": [
+											{
+												"key": "token",
+												"value": "eyJraWQiOiJJaWI4dTYrMk5JS29mc2RXdEUwWEJhXC8wclVhSWtHbU82WndsV3BBck1Zcz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3NGE4MjRhOC0wMDcxLTcwYTctMmNiOC01NjMzZjdlMzY5Y2IiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV95REFKM29aUXkiLCJjb2duaXRvOnVzZXJuYW1lIjoiMTE0NzI4MDI2NjciLCJvcmlnaW5fanRpIjoiYmYyMTRmNWEtMGMzMC00M2U0LWFmNGMtMTMyNTJiODJiMmRjIiwiYXVkIjoiNHZoMnFuY2I3dG9xOW9zZGExZ2ZtOGhmamciLCJldmVudF9pZCI6ImM3MjE4NDZkLWM2YTUtNGMxZS05YzJiLTkzZDM1NGZkOWU3MSIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNzI3MDM3NTEyLCJuYW1lIjoiTWFjayBXYWVsY2hpIiwiZXhwIjoxNzI3MDQxMTEyLCJjdXN0b206cm9sZSI6IkFETUlOIiwiY3VzdG9tOmNwZiI6IjExNDcyODAyNjY3IiwiaWF0IjoxNzI3MDM3NTEyLCJqdGkiOiI5MzNlOGYwMy04M2YwLTQ2N2EtYWUzZC0zYzVjMDEyNWM3NjUiLCJlbWFpbCI6IktlbGx5NjNAaG90bWFpbC5jb20ifQ.LAJ1OaL4Bwk-nMuLMe9YUl1kqX4AW3FC-SP_4oX1kQhJgpTd1PnU_nuMRdJ3JRlJYhUddC4yJ2p9_kdX6K_pcmaFGPPKDyWMlWTCz7HcUnihRnGdSetBW-pGVx8MI7iBNIyeFJetA2IAiyXtmQ5_TvvJvCD3RxcubwI_U1XiP1Bz2dx_LAGFGToDmPydMSarayA6QH_CdGWExVjQ0q6VswrJjHwM8WSPHMnfVffob7iDkLidNMC6l_xekTBj6-cgQ1Y37KPFizdQI9mgxQTqN57EelOjVjCqotAPkjgqPwYsOLLenW29A-TgwQ0dIx2ly-mKqZn4vrEyINO675gw3w",
+												"type": "string"
+											}
+										]
+									},
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"packages": {},
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"packages": {},
+												"exec": [
+													""
+												]
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "CPF",
+			"value": ""
+		},
+		{
+			"key": "randomCPF",
+			"value": ""
+		},
+		{
+			"key": "$$randomCPF",
+			"value": ""
+		},
+		{
+			"key": "cpf",
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"key": "clientName",
+			"value": ""
+		},
+		{
+			"key": "clientId",
+			"value": ""
+		},
+		{
+			"key": "orderId",
+			"value": ""
+		},
+		{
+			"key": "role",
+			"value": ""
+		},
+		{
+			"key": "users.customer.cpf",
+			"value": ""
+		},
+		{
+			"key": "users.customer.name",
+			"value": ""
+		},
+		{
+			"key": "users.customer.email",
+			"value": ""
+		},
+		{
+			"key": "users.admin.cpf",
+			"value": ""
+		},
+		{
+			"key": "users.admin.name",
+			"value": ""
+		},
+		{
+			"key": "users.admin.email",
+			"value": ""
+		},
+		{
+			"key": "users.app.cpf",
+			"value": ""
+		},
+		{
+			"key": "users.app.name",
+			"value": ""
+		},
+		{
+			"key": "users.app.email",
+			"value": ""
+		}
+	]
+}
